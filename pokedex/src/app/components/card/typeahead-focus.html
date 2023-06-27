@@ -1,0 +1,13 @@
+<label for="typeahead-focus">Search for a state:</label>
+<input
+	id="typeahead-focus"
+	type="text"
+	class="form-control"
+	[(ngModel)]="model"
+	[ngbTypeahead]="search"
+	(focus)="focus$.next($any($event).target.value)"
+	(click)="click$.next($any($event).target.value)"
+	#instance="ngbTypeahead"
+/>
+<hr />
+<pre>Model: {{ model | json }}</pre>
