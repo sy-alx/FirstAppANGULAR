@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokedex';
+  numberofpokemon = 1015;
+  pokemons: Array<any> = [];
+  somePokemon = {name : 'Salamèche', type : 'feu'};
+
+  displayPokemon(): void {
+    this.pokemons = [
+      {name : 'Salamèche'},
+      {name : 'Pikachu'},
+      {name : 'tortank'},
+    ]
+  }
 }
+
