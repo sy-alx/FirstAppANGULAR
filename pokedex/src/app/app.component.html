@@ -6,18 +6,9 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Pokedex</h1>
-  <p>il y a {{numberofpokemon}} pokemon <p>
-  <p>{{somePokemon.name}} est le premier pokemon</p>
-  <px-card></px-card>
+  <h1>Pokédex</h1>
 
-  <button (click)="displayPokemon()">Click to display</button>
-
-  <div *ngIf="pokemons.length >= 3"> 
-    <p *ngFor="let pokemon of pokemons">
-    {{pokemon.name}}
-    </p>
-  </div>
+  <hr>
 
   <ngbd-typeahead-focus></ngbd-typeahead-focus>
  

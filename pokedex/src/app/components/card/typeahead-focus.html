@@ -1,5 +1,8 @@
-<label for="typeahead-focus">Search for a state:</label>
-<input
+<div class="container">
+<label class="d-flex justify-content-center" for="typeahead-focus">Choisisez votre pokémon</label>
+
+<input 
+	
 	id="typeahead-focus"
 	type="text"
 	class="form-control"
@@ -9,5 +12,10 @@
 	(click)="click$.next($any($event).target.value)"
 	#instance="ngbTypeahead"
 />
+
 <hr />
 <pre>Model: {{ model | json }}</pre>
+
+
+</div>
+

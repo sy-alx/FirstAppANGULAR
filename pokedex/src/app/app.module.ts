@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTypeaheadFocus } from "./components/card/typehead-focus";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { NgbdTypeaheadFocus } from "./components/card/typehead-focus";
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        NgbdTypeaheadFocus
+        NgbdTypeaheadFocus,
+        HttpClientModule
     ]
 })
 export class AppModule { }
