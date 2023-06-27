@@ -23,8 +23,10 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class NgbdTypeaheadFocus {
-	public model: any;
+	public Names: any;
 	pokemonNames: string[] = [];
+	public Weights: any;
+	pokemonWeight : string[] = [];
 
 	@ViewChild('instance', { static: true })
     instance!: NgbTypeahead;
@@ -34,7 +36,7 @@ export class NgbdTypeaheadFocus {
 	constructor(private http: HttpClient) { }
 
 	ngOnInit(): void {
-		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0').subscribe(
+		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0').subscribe(
 		  data => {
 			this.pokemonNames = data.results.map((pokemon: { name: any; }) => pokemon.name);
 		  },
@@ -42,7 +44,17 @@ export class NgbdTypeaheadFocus {
 			console.error('Error: ' + error);
 		  }
 		);
+
+		this.http.get<any>('https://pokeapi.co/api/v2/pokemon/' + this.pokemonNames).subscribe(
+			data => {
+			  this.pokemonWeight = data.results.map((pokemon: { weight: any; }) => pokemon.weight);
+			},
+			error => {
+			  console.error('Error: ' + error);
+			}
+		  );
 	  }
+
 
 	search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {
 		const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());

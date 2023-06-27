@@ -6,7 +6,8 @@
 	id="typeahead-focus"
 	type="text"
 	class="form-control"
-	[(ngModel)]="model"
+	[(ngModel)]="Names"
+	[(ngModel)]="Weights"
 	[ngbTypeahead]="search"
 	(focus)="focus$.next($any($event).target.value)"
 	(click)="click$.next($any($event).target.value)"
@@ -14,7 +15,9 @@
 />
 
 <hr />
-<pre>Model: {{ model | json }}</pre>
+<pre>Model: {{ Names | json }}</pre>
+<pre>weight: {{ Weights | json }}</pre>
+
 
 
 </div>
