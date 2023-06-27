@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
     declarations: [
         AppComponent,
-        CardComponent
+        CardComponent,
+        NgbdTypeaheadFocus
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -22,7 +23,6 @@ import { FormsModule } from '@angular/forms';
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        NgbdTypeaheadFocus,
         HttpClientModule,
         CommonModule,
         FormsModule

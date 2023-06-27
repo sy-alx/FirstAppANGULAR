@@ -16,10 +16,15 @@
 <hr />
 <pre>Model: {{ selectedPokemonName | json }}</pre>
 <pre>weight: {{ Weights | json }}</pre>
+
+<pre>Taille: {{ pokemonHeight }}</pre>
 <pre>Type: {{ pokemonType | json }}</pre>
-<div *ngFor="let stat of pokemonStats">
-	<pre>{{ stat.stat.name }}: {{ stat.base_stat }}</pre>
-  </div>
+<pre>HP: {{ pokemonStats.hp }}</pre>
+<pre>Attack: {{ pokemonStats.atk }}</pre>
+<pre>Defense: {{ pokemonStats.def }}</pre>
+<pre>Special Attack: {{ pokemonStats.spe_atk }}</pre>
+<pre>Special Defense: {{ pokemonStats.spe_def }}</pre>
+<pre>Speed: {{ pokemonStats.vit }}</pre>
 
 
 

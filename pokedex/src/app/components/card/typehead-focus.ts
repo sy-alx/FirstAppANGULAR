@@ -11,8 +11,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'ngbd-typeahead-focus',
-	standalone: true,
-	imports: [NgbTypeaheadModule, FormsModule, JsonPipe],
 	templateUrl: './typeahead-focus.html',
 	styles: [
 		`	d-flex justify-content-center
@@ -29,8 +27,11 @@ export class NgbdTypeaheadFocus {
 	selectedPokemonName: string | undefined;
 	pokemonType: string | undefined;
 	pokemonStats: any;
+
 	public Weights : any;
+	public Height : any;
 	pokemonWeight : string[] = [];
+	pokemonHeight : string[] = [];
 	
 
 	@ViewChild('instance', { static: true })
@@ -54,11 +55,13 @@ export class NgbdTypeaheadFocus {
 	
 	  onSelectPokemon(event: any) {
 		let selectedPokemonName = event.item;
-		this.http.get<any>('https://pokeapi.co/api/v2/pokemon/' + selectedPokemonName).subscribe(
+		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon/' + selectedPokemonName).subscribe(
 		  data => {
 			this.Weights = data.weight;
-			this.pokemonType = data.types[0].type.name; 
+			this.Height = data.height; 
+			this.pokemonType = data.types[0].name; 
 			this.pokemonStats = data.stats; 
+			
 		  },
 		  error => {
 			console.error('Error: ' + error);
