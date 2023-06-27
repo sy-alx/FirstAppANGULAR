@@ -2,21 +2,25 @@
 <label class="d-flex justify-content-center" for="typeahead-focus">Choisisez votre pokémon</label>
 
 <input 
-	
-	id="typeahead-focus"
-	type="text"
-	class="form-control"
-	[(ngModel)]="Names"
-	[(ngModel)]="Weights"
-	[ngbTypeahead]="search"
-	(focus)="focus$.next($any($event).target.value)"
-	(click)="click$.next($any($event).target.value)"
-	#instance="ngbTypeahead"
+  id="typeahead-name"
+  type="text"
+  class="form-control"
+  [(ngModel)]="selectedPokemonName"
+  [ngbTypeahead]="search"
+  (focus)="focus$.next($any($event).target.value)"
+  (click)="click$.next($any($event).target.value)"
+  #instance="ngbTypeahead"
+  (selectItem)="onSelectPokemon($event)"
 />
 
 <hr />
-<pre>Model: {{ Names | json }}</pre>
+<pre>Model: {{ selectedPokemonName | json }}</pre>
 <pre>weight: {{ Weights | json }}</pre>
+<pre>Type: {{ pokemonType | json }}</pre>
+<div *ngFor="let stat of pokemonStats">
+	<pre>{{ stat.stat.name }}: {{ stat.base_stat }}</pre>
+  </div>
+
 
 
 

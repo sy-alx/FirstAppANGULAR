@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -25,18 +26,23 @@ import { HttpClient } from '@angular/common/http';
 export class NgbdTypeaheadFocus {
 	public Names: any;
 	pokemonNames: string[] = [];
-	public Weights: any;
+	selectedPokemonName: string | undefined;
+	pokemonType: string | undefined;
+	pokemonStats: any;
+	public Weights : any;
 	pokemonWeight : string[] = [];
+	
 
 	@ViewChild('instance', { static: true })
     instance!: NgbTypeahead;
 	focus$ = new Subject<string>();
 	click$ = new Subject<string>();
+	
 
 	constructor(private http: HttpClient) { }
 
 	ngOnInit(): void {
-		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0').subscribe(
+		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=4000&offset=0').subscribe(
 		  data => {
 			this.pokemonNames = data.results.map((pokemon: { name: any; }) => pokemon.name);
 		  },
@@ -44,16 +50,24 @@ export class NgbdTypeaheadFocus {
 			console.error('Error: ' + error);
 		  }
 		);
-
-		this.http.get<any>('https://pokeapi.co/api/v2/pokemon/' + this.pokemonNames).subscribe(
-			data => {
-			  this.pokemonWeight = data.results.map((pokemon: { weight: any; }) => pokemon.weight);
-			},
-			error => {
-			  console.error('Error: ' + error);
-			}
-		  );
 	  }
+	
+	  onSelectPokemon(event: any) {
+		let selectedPokemonName = event.item;
+		this.http.get<any>('https://pokeapi.co/api/v2/pokemon/' + selectedPokemonName).subscribe(
+		  data => {
+			this.Weights = data.weight;
+			this.pokemonType = data.types[0].type.name; 
+			this.pokemonStats = data.stats; 
+		  },
+		  error => {
+			console.error('Error: ' + error);
+		  }
+		);
+	  }
+		
+	
+	
 
 
 	search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {

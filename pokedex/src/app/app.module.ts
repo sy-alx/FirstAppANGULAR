@@ -7,6 +7,9 @@ import { CardComponent } from './components/card/card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTypeaheadFocus } from "./components/card/typehead-focus";
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
     declarations: [
@@ -20,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
         AppRoutingModule,
         NgbModule,
         NgbdTypeaheadFocus,
-        HttpClientModule
+        HttpClientModule,
+        CommonModule,
+        FormsModule
     ]
 })
 export class AppModule { }
