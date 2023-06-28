@@ -9,6 +9,7 @@ import { NgbdTypeaheadFocus } from "./components/card/typehead-focus";
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgbdModalComponent } from "./components/card/modal-component";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
         NgbModule,
         HttpClientModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        NgbdModalComponent
     ]
 })
 export class AppModule { }

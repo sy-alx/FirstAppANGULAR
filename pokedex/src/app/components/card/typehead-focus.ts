@@ -30,8 +30,8 @@ export class NgbdTypeaheadFocus {
 
 	public Weights : any;
 	public Height : any;
-	pokemonWeight : string[] = [];
-	pokemonHeight : string[] = [];
+	pokemonWeight : string | undefined;
+	pokemonHeight : string | undefined;
 	
 
 	@ViewChild('instance', { static: true })
@@ -58,7 +58,7 @@ export class NgbdTypeaheadFocus {
 		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon/' + selectedPokemonName).subscribe(
 		  data => {
 			this.Weights = data.weight;
-			this.Height = data.height; 
+			this.pokemonHeight = data.height; 
 			this.pokemonType = data.types[0].name; 
 			this.pokemonStats = data.stats; 
 			
