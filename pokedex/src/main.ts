@@ -1,7 +1,17 @@
-  import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { fromEvent, tap } from 'rxjs';
 
-import { AppModule } from './app/app.module';
+const source$ = fromEvent(document, 'keydown');
+const result$ = source$.pipe(
+  tap((event: Event) => {
+    if (event instanceof KeyboardEvent) {
+      console.log('Key pressed: ' + event.key);
+    }
+  })
+);
 
+const subscription = result$.subscribe();
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+setTimeout(() => {
+  console.log('Unsubscribe after 60 seconds');
+  subscription.unsubscribe();
+}, 60_000);
