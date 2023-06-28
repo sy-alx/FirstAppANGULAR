@@ -1,5 +1,5 @@
 <div class="container">
-<label class="d-flex justify-content-center" for="typeahead-focus">Choisisez votre pokémon</label>
+<label class="d-flex justify-content-center" for="typeahead-focus" style="font-family: 'Pokemon Hollow'; font-size: 2rem;">Choisisez votre pokémon</label>
 
 <input 
   id="typeahead-name"
@@ -14,13 +14,6 @@
 />
 
 <hr />
-
-
-
-<pre>Nom : {{selectedPokemonName}} | Poids : {{ Weights}} | Taille : {{ pokemonHeight}} | Type : {{ pokemonType}} <pre>HP: {{ pokemonStats.hp }} | Attaque : {{ pokemonStats.atk }} | Defense : {{ pokemonStats.def }} | Special Attaque : {{ pokemonStats.spe_atk }} | Special Defense: {{ pokemonStats.spe_def }} | Vitesse : {{ pokemonStats.vit }} </pre></pre>
-
-
-
 
 <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
