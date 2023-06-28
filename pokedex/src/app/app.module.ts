@@ -9,6 +9,8 @@ import { NgbdTypeaheadFocus } from "./components/card/typehead-focus";
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
         HttpClientModule,
         CommonModule,
         FormsModule,
+        TableModule 
     ]
 })
 export class AppModule { }

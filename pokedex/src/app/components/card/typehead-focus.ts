@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -28,6 +29,8 @@ export class NgbdTypeaheadFocus {
 	pokemonType: string | undefined;
 	pokemonStats: any;
 
+	data: any[] = [];
+
 	public Weights : any;
 	public Height : any;
 	pokemonWeight : string | undefined;
@@ -46,6 +49,11 @@ export class NgbdTypeaheadFocus {
 		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=4000&offset=0').subscribe(
 		  data => {
 			this.pokemonNames = data.results.map((pokemon: { name: any; }) => pokemon.name);
+
+			this.data = [
+				{ code: 'Name', name: this.pokemonNames },
+
+			  ];
 		  },
 		  error => {
 			console.error('Error: ' + error);
@@ -62,6 +70,20 @@ export class NgbdTypeaheadFocus {
 			this.pokemonType = data.types[0].name; 
 			this.pokemonStats = data.stats; 
 			
+			this.data = [
+				{ 
+				  Nom: selectedPokemonName,
+				  Poid: this.Weights,
+				  Taille: this.pokemonHeight,
+				  Type: this.pokemonType,
+				  HP: this.pokemonStats.hp,
+				  Attaque: this.pokemonStats.atk,
+				  Defense: this.pokemonStats.def,
+				  SpecialAttaque: this.pokemonStats.spe_atk,
+				  SpecialDefense: this.pokemonStats.spe_def,
+				  Vitesse: this.pokemonStats.vit
+				}
+			  ];
 		  },
 		  error => {
 			console.error('Error: ' + error);
