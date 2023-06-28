@@ -13,13 +13,8 @@ import { TableModule } from 'primeng/table';
 @Component({
 	selector: 'ngbd-typeahead-focus',
 	templateUrl: './typeahead-focus.html',
-	styles: [
-		`	d-flex justify-content-center
-			.form-control {
-				width: 30px;
-			}
-		`,
-	],
+	styleUrls: ['./typehead-focus.css'],
+
 })
 
 export class NgbdTypeaheadFocus {
@@ -28,6 +23,7 @@ export class NgbdTypeaheadFocus {
 	selectedPokemonName: string | undefined;
 	pokemonType: string | undefined;
 	pokemonStats: any;
+	pokedexId : any;
 
 	data: any[] = [];
 
@@ -41,6 +37,7 @@ export class NgbdTypeaheadFocus {
     instance!: NgbTypeahead;
 	focus$ = new Subject<string>();
 	click$ = new Subject<string>();
+	selectedPokemonImage: any;
 	
 
 	constructor(private http: HttpClient) { }
@@ -65,25 +62,28 @@ export class NgbdTypeaheadFocus {
 		let selectedPokemonName = event.item;
 		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon/' + selectedPokemonName).subscribe(
 		  data => {
+			this.pokedexId = data.pokedexId;
 			this.Weights = data.weight;
 			this.pokemonHeight = data.height; 
 			this.pokemonType = data.types[0].name; 
 			this.pokemonStats = data.stats; 
 			
-			this.data = [
-				{ 
-				  Nom: selectedPokemonName,
-				  Poid: this.Weights,
-				  Taille: this.pokemonHeight,
-				  Type: this.pokemonType,
-				  HP: this.pokemonStats.hp,
-				  Attaque: this.pokemonStats.atk,
-				  Defense: this.pokemonStats.def,
-				  SpecialAttaque: this.pokemonStats.spe_atk,
-				  SpecialDefense: this.pokemonStats.spe_def,
-				  Vitesse: this.pokemonStats.vit
-				}
-			  ];
+			this.data.unshift({
+				ID: this.pokedexId,
+				Nom: selectedPokemonName,
+				Poid: this.Weights,
+				Taille: this.pokemonHeight,
+				Type: this.pokemonType,
+				HP: this.pokemonStats.hp,
+				Attaque: this.pokemonStats.atk,
+				Defense: this.pokemonStats.def,
+				SpecialAttaque: this.pokemonStats.spe_atk,
+				SpecialDefense: this.pokemonStats.spe_def,
+				Vitesse: this.pokemonStats.vit
+			  });
+			  
+			  this.selectedPokemonImage = `https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${this.pokedexId}/regular.png`;
+			  console.log(this.selectedPokemonImage);
 		  },
 		  error => {
 			console.error('Error: ' + error);
@@ -91,8 +91,14 @@ export class NgbdTypeaheadFocus {
 		);
 	  }
 		
-	
-	
+	  handleButtonClick() {
+		console.log('Le bouton a été cliqué.' + this.selectedPokemonImage);
+	  }
+	  
+	  resetTable() {
+		this.data = [];
+	  }
+	  
 
 
 	search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {
