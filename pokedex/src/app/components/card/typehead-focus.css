@@ -1,6 +1,11 @@
-container {
-    align-items: center !important;
-    display: flex !important;
-    flex-grow: 1;
-}
 
+
+@import url('https://fonts.cdnfonts.com/css/pokemon-hollow');
+
+custom {
+
+    font-family: 'Pokemon Hollow', sans-serif !important;
+    font-size: 8rem !important;
+    
+
+}
