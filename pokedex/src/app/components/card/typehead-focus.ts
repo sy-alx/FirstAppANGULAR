@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 
 
 
@@ -38,14 +38,17 @@ export class NgbdTypeaheadFocus {
 	focus$ = new Subject<string>();
 	click$ = new Subject<string>();
 	selectedPokemonImage: any;
+
+	@ViewChild('dt', { static: true })
+	table!: Table;
 	
 
 	constructor(private http: HttpClient) { }
 
 	ngOnInit(): void {
-		this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=4000&offset=0').subscribe(
+		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon').subscribe(
 		  data => {
-			this.pokemonNames = data.results.map((pokemon: { name: any; }) => pokemon.name);
+			this.pokemonNames = data.map((pokemon: { name: { fr: any; }; }) => pokemon.name.fr);
 
 			this.data = [
 				{ code: 'Name', name: this.pokemonNames },
@@ -60,7 +63,8 @@ export class NgbdTypeaheadFocus {
 	
 	  onSelectPokemon(event: any) {
 		let selectedPokemonName = event.item;
-		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon/' + selectedPokemonName).subscribe(
+		let unaccentedPokemonName = selectedPokemonName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		this.http.get<any>('https://api-pokemon-fr.vercel.app/api/v1/pokemon/' + unaccentedPokemonName).subscribe(
 		  data => {
 			this.pokedexId = data.pokedexId;
 			this.Weights = data.weight;
@@ -90,13 +94,11 @@ export class NgbdTypeaheadFocus {
 		  }
 		);
 	  }
-		
-	  handleButtonClick() {
-		console.log('Le bouton a été cliqué.' + this.selectedPokemonImage);
-	  }
-	  
+
+
 	  resetTable() {
 		this.data = [];
+		this.table.clear();
 	  }
 	  
 
