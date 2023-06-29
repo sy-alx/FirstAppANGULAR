@@ -64,3 +64,12 @@ Les observes ont besoin de s'abonner à un observale afin d'etre notifie et de r
 On appelle ce procédé "le pattern observer", il permet de mettre en place des operations concurrents et de la logique très ava,cée.
 
 ces "observers" sont aussi appelés 'subscribers', continueront d'ecouter tout ce qui se passera au niveau de l'observable jusqu'à que ce dernier soit détruit.
+
+## Communiquer avec  des services qui utilisent http
+
+- le but : 
+    - Envoyer / recevoir des donnees avec le protocole http
+    - decouvrir le client http d'Angular
+    - (mettre en place un backEnd)
+    - gerer les opérations CRUD avec Angular
+    
