@@ -21,34 +21,7 @@
       <div class="icon"></div>
       <div class="resetText">Reset</div>
     </button>
-    
-      <!-- Bouton modale -->
-      <button class="LookIMG" type="button" data-bs-toggle="modal" data-bs-target="#IMGModal">
-        <div class="icon2"></div>
-        <div class="IMGText">Voir</div>
-      </button>
-
-      <!-- Fenêtre modale -->
-      <div class="modal fade" id="IMGModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Image du Pokémon</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <img src="{{ selectedPokemonImage }}" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
   </div>
-
-
-
-
-
-
 
 
 
@@ -68,14 +41,15 @@
         <th pSortableColumn="SpecialAttaque">Special Attaque<p-sortIcon field="SpecialAttaque"></p-sortIcon></th>
         <th pSortableColumn="SpecialDefense">Special Defense<p-sortIcon field="SpecialDefense"></p-sortIcon></th>
         <th pSortableColumn="Vitesse">Vitesse<p-sortIcon field="Vitesse"></p-sortIcon></th>
+        <th>Visuel</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
       <tr>
         <td>{{ product.ID }}</td>
         <td>{{ product.Nom }}</td>
-        <td>{{ product.Poid }}</td>
-        <td>{{ product.Taille }}</td>
+        <td>{{ product.Poid }} Kg</td>
+        <td>{{ product.Taille }} m</td>
         <td>{{ product.Type }}</td>
         <td>{{ product.HP | json }}</td>
         <td>{{ product.Attaque | json }}</td>
@@ -83,7 +57,26 @@
         <td>{{ product.SpecialAttaque | json }}</td>
         <td>{{ product.SpecialDefense | json }}</td>
         <td>{{ product.Vitesse | json }}</td>
+
+        <td>
+          <button class="LookIMG" type="button" (click)="open(content, product.ID)">
+            <div class="icon2"></div>
+            <div class="IMGText">Voir</div>
+          </button>
+        </td>
       </tr>
     </ng-template>  
   </p-table>
+
+  <ng-template #content let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ selectedPokemonName }}</h4>
+    </div>
+    <div class="modal-body">
+      <img [src]="selectedPokemonImage" alt="">
+    </div>
+  </ng-template>
+
+
+
 </div>
