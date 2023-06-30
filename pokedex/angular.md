@@ -72,4 +72,38 @@ ces "observers" sont aussi appelés 'subscribers', continueront d'ecouter tout c
     - decouvrir le client http d'Angular
     - (mettre en place un backEnd)
     - gerer les opérations CRUD avec Angular
-    
+
+## Les formulaires 
+
+Le framework Angular propose deux approches pour les formulaires : `template-driven` et `reactive`,
+Aucune de ces deux approches ne peut être considérés comme meilleure,
+la grande différence reside dans la façon dont sont gérées les données : 
+
+
+• `Template-driven` : les formulaires sont faciles à mettre en place, la creation se fait par le template, c'est aussi
+te cas pour la mise en place de regue de validation. Ils sont difficiles a tester, leur fonctionnement depend est base
+sur les mecanismes de detection de changement du framework
+`Reactive forms`: ils sont plus robustes et adaptés lorsqu'on traite des données complexes. Ils sont mis en place au
+niveau du composant. Ils permettent de manipuler les données au travers d'un `forn-mode` .
+
+## Les formulaires reactifs 
+
+les classe clés de ces types de formulaires sont : 
+    - FormControl : représente un élement de formulaire tel qu'un `<input>`
+    - FormGroup : Représente une collection de FormControl, le FormGroup de plus haut niveau: `<form>`
+    - FormArray : 
+
+    - FormArray:Représente une liste de FormControI, peut etre modifier a l'execution (ajout et suppression dynamique de FormControl
+        possible)
+
+
+Les statuts de fromControl qui permettent d' indiquer l' etat du formulaire:
+
+- ng-untouched: indique que l'utilisateur n'a pas interagi avec le control
+- ng-touched:
+
+- ng-dirty: indique si fournit on a fourni une valeur au control
+- ng-pristine:
+
+- ng-valid
+- ng-invalid
