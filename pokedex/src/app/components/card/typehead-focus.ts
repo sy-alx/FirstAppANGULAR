@@ -18,7 +18,6 @@ export class NgbdTypeaheadFocus {
   public Names: any;
   pokemonNames: string[] = [];
   selectedPokemonName: string | undefined;
-  pokemonType: string | undefined;
   pokemonStats: any;
   pokedexId: any;
 
@@ -37,6 +36,7 @@ export class NgbdTypeaheadFocus {
 
   @ViewChild('dt', { static: true })
   table!: Table;
+  pokemonTypes: any;
 
   constructor(private http: HttpClient, private modalService: NgbModal) {}
 
@@ -60,9 +60,9 @@ export class NgbdTypeaheadFocus {
       (data) => {
         this.pokedexId = data.pokedexId;
         this.Weights = data.weight;
-		this.Height =data.height;
+		    this.Height =data.height;
         this.pokemonHeight = data.height;
-        this.pokemonType = data.types[0].name;
+        this.pokemonTypes = data.types.map((type: any) => type.name);
         this.pokemonStats = data.stats;
 
         this.data = [
@@ -71,7 +71,7 @@ export class NgbdTypeaheadFocus {
             Nom: selectedPokemonName,
             Poid: parseFloat(this.Weights.replace(' kg', '').replace(',', '.')),
             Taille: parseFloat(this.Height.replace(' m', '').replace(',', '.')) || 0,
-            Type: this.pokemonType,
+            Type: this.pokemonTypes,
             HP: this.pokemonStats.hp,
             Attaque: this.pokemonStats.atk,
             Defense: this.pokemonStats.def,
